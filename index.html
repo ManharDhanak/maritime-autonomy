@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maritime Autonomy Research – Florida Atlantic University</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1a1a1a; background: #f8f8f6; line-height: 1.7; font-size: 16px; }
+  a { color: #185FA5; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .site-header { background: #fff; border-bottom: 1px solid #e5e5e0; padding: 2rem 3rem 0; }
+  .header-top { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+  .lab-title { font-size: 24px; font-weight: 500; }
+  .lab-subtitle { font-size: 14px; color: #666; margin-bottom: 1.5rem; }
+
+  .tab-nav { display: flex; gap: 0; border-bottom: none; }
+  .tab-btn { background: none; border: none; border-bottom: 2px solid transparent; padding: 10px 0; font-size: 15px; font-weight: 400; color: #666; cursor: pointer; margin-right: 28px; transition: color 0.15s; }
+  .tab-btn:hover { color: #1a1a1a; }
+  .tab-btn.active { color: #1a1a1a; border-bottom-color: #1a1a1a; font-weight: 500; }
+
+  .tab-content { display: none; padding: 2.5rem 3rem; max-width: 900px; }
+  .tab-content.active { display: block; }
+
+  .section-label { font-size: 12px; font-weight: 500; color: #888; text-transform: uppercase; letter-spacing: 0.07em; margin: 0 0 1rem; }
+
+  .people-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; margin-bottom: 2rem; }
+  .person-card { background: #fff; border: 1px solid #e5e5e0; border-radius: 12px; padding: 1.25rem; }
+  .avatar { width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500; margin-bottom: 12px; }
+  .avatar-photo { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; object-position: center top; margin-bottom: 12px; display: block; }
+  .av-blue { background: #E6F1FB; color: #185FA5; }
+  .av-green { background: #EAF3DE; color: #3B6D11; }
+  .av-amber { background: #FAEEDA; color: #854F0B; }
+  .person-name { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
+  .person-role { font-size: 13px; color: #666; margin-bottom: 4px; }
+  .person-detail { font-size: 12px; color: #999; }
+
+  .about-sponsors { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 1.5rem; }
+  .sponsor-tag { font-size: 12px; padding: 5px 14px; border-radius: 8px; background: #f1efe8; color: #555; border: 1px solid #e5e5e0; }
+  #tab-about p { font-size: 15px; color: #444; line-height: 1.8; max-width: 760px; margin-bottom: 1rem; }
+  #tab-about p:last-of-type { margin-bottom: 0; }
+  .funding-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 1.5rem; }
+  .funder-tag { font-size: 12px; padding: 4px 12px; border-radius: 8px; background: #f1efe8; color: #666; border: 1px solid #e5e5e0; }
+
+  .research-area { background: #fff; border: 1px solid #e5e5e0; border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 12px; display: flex; gap: 16px; align-items: flex-start; }
+  .research-icon { font-size: 22px; color: #888; margin-top: 2px; flex-shrink: 0; }
+  .research-title { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  .research-desc { font-size: 14px; color: #555; line-height: 1.6; }
+  .research-img { width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; margin-top: 10px; display: block; }
+  .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .gallery-card { background: #fff; border: 1px solid #e5e5e0; border-radius: 12px; overflow: hidden; }
+  .gallery-card video, .gallery-card img { width: 100%; display: block; max-height: 200px; object-fit: cover; }
+  .gallery-caption { padding: 10px 14px; font-size: 13px; color: #555; }
+
+  .pub-item { border-bottom: 1px solid #e5e5e0; padding: 1rem 0; }
+  .pub-item:last-child { border-bottom: none; }
+  .pub-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; line-height: 1.5; }
+  .pub-authors { font-size: 13px; color: #555; margin-bottom: 2px; }
+  .pub-venue { font-size: 13px; color: #888; font-style: italic; }
+  .badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 8px; margin-left: 8px; vertical-align: middle; background: #f1efe8; color: #666; border: 1px solid #e5e5e0; font-style: normal; }
+
+  @media (max-width: 600px) {
+    .site-header, .tab-content { padding-left: 1.25rem; padding-right: 1.25rem; }
+    .tab-btn { margin-right: 16px; font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-top">
+    <i class="ti ti-ship" style="font-size:28px;color:#888" aria-hidden="true"></i>
+    <h1 class="lab-title">Maritime Autonomy Research</h1>
+  </div>
+  <p class="lab-subtitle">Florida Atlantic University &nbsp;·&nbsp; Department of Ocean &amp; Mechanical Engineering &nbsp;·&nbsp; SeaTech</p>
+  <nav class="tab-nav" role="tablist" aria-label="Site sections">
+    <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="tab-about" data-tab="about">About</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-people" data-tab="people">People</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-research" data-tab="research">Research &amp; Technology Development</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-publications" data-tab="publications">Publications</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-theses" data-tab="theses">Dissertations &amp; Theses</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-gallery" data-tab="gallery">Gallery</button>
+  </nav>
+</header>
+
+<main>
+
+  <!-- ABOUT -->
+  <section id="tab-about" class="tab-content active" role="tabpanel">
+    <p>The Maritime Autonomy Research group at Florida Atlantic University's SeaTech Institute develops autonomous marine systems for electromagnetic sensing, navigation and control of modular USVs and AUVs, and autonomous systems for harvesting ocean energy — all supported by modeling and simulation and field testing. Our work spans Navy-relevant and civilian applications, with an emphasis on transitioning research outcomes to deployable, field-validated capability.</p>
+    <p>Current work centers on autonomous navigation and control of USVs, vision-based AI-assisted object detection and classification for obstacle avoidance, deep reinforcement learning (DRL)-based control, and the coordination of collaborating USV teams. We also explore the application of autonomous marine systems for harvesting ocean and tidal currents using USV-based marine hydrokinetic (MHK) turbines. In parallel, we are developing an integrated electric and magnetic field (EMF) sensor system and conducting field deployment and testing in open waters, enabling concurrent E- and B-field measurement in the water column with accurate geolocation. The group operates from the Dania Beach campus, adjacent to the Navy's South Florida Ocean Measurement Facility (SFOMF).</p>
+    <p>We are committed to training the next generation of ocean engineers through hands-on research, field operations, and collaboration with U.S. Navy and industry partners.</p>
+    <div class="about-sponsors">
+      <span class="sponsor-tag"><i class="ti ti-building-bank" aria-hidden="true"></i>&nbsp; U.S. Office of Naval Research (ONR)</span>
+      <span class="sponsor-tag"><i class="ti ti-anchor" aria-hidden="true"></i>&nbsp; NSWC-Panama City via NEEC</span>
+      <span class="sponsor-tag"><i class="ti ti-school" aria-hidden="true"></i>&nbsp; Florida Atlantic University</span>
+    </div>
+  </section>
+
+  <!-- PEOPLE -->
+  <section id="tab-people" class="tab-content" role="tabpanel">
+    <p class="section-label">Faculty</p>
+    <div class="people-grid" style="margin-bottom:2rem;">
+      <div class="person-card">
+        <img src="Dhanak_photo.jpg" alt="Manhar Dhanak" class="avatar-photo">
+        <div class="person-name">Manhar Dhanak, Ph.D.</div>
+        <div class="person-role">Principal Investigator</div>
+        <div class="person-detail">Professor, Ocean &amp; Mechanical Engineering, FAU</div>
+      </div>
+    </div>
+
+    <p class="section-label">Students</p>
+    <div class="people-grid" style="margin-bottom:2rem;">
+      <div class="person-card">
+        <div class="avatar av-green">XV</div>
+        <div class="person-name">Xavier Vicent Navarro</div>
+        <div class="person-role">PhD Candidate</div>
+        <div class="person-detail">Decentralized cooperative navigation of USV–UAV teams</div>
+      </div>
+      <div class="person-card">
+        <div class="avatar av-amber">DM</div>
+        <div class="person-name">Danny Morris</div>
+        <div class="person-role">MS Student</div>
+        <div class="person-detail">Sensor-equipped towfish for AUV deployment</div>
+      </div>
+      <div class="person-card">
+        <div class="avatar av-amber">EB</div>
+        <div class="person-name">Eric Benavidez</div>
+        <div class="person-role">MS Student</div>
+        <div class="person-detail">Geomagnetic navigation</div>
+      </div>
+    </div>
+
+    <p class="section-label">Staff</p>
+    <div class="people-grid" style="margin-bottom:2rem;">
+      <div class="person-card">
+        <div class="avatar" style="background:#E1F5EE;color:#0F6E56;">JF</div>
+        <div class="person-name">John Frankenfield</div>
+        <div class="person-role">Staff Engineer</div>
+        <div class="person-detail">Mechanical and field support</div>
+      </div>
+    </div>
+
+    <div class="funding-bar">
+      <span class="funder-tag">Supported by the U.S. Office of Naval Research (ONR)</span>
+      <span class="funder-tag">NSWC-Panama City via NEEC</span>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="tab-research" class="tab-content" role="tabpanel">
+
+    <div class="research-area">
+      <i class="ti ti-robot research-icon" aria-hidden="true"></i>
+      <div style="width:100%">
+        <div class="research-title">Autonomous navigation &amp; control of USVs</div>
+        <div class="research-desc">Development and field validation of autonomous navigation and control systems for modular WAM-V 16 USVs, including path planning, obstacle avoidance, and station-keeping. Controllers include PID, fuzzy logic-assisted PID, and deep reinforcement learning (DRL)-based approaches, with demonstrated sim-to-real transfer from Gazebo/VRX simulation environments to physical platforms.</div>
+        <img src="WAM-V 16 USV.jpg" alt="WAM-V 16 USV" class="research-img">
+      </div>
+    </div>
+
+    <div class="research-area">
+      <i class="ti ti-eye research-icon" aria-hidden="true"></i>
+      <div>
+        <div class="research-title">AI-enabled perception &amp; object detection</div>
+        <div class="research-desc">Vision-based detection and classification of maritime objects using LiDAR (Velodyne VLP-16), ZED 2i stereo cameras, and YOLO-based deep learning algorithms integrated via a custom ROS2 autonomy stack. Supports obstacle avoidance, target tracking, and COLREGs-compliant autonomous navigation.</div>
+      </div>
+    </div>
+
+    <div class="research-area">
+      <i class="ti ti-topology-star-3 research-icon" aria-hidden="true"></i>
+      <div style="width:100%">
+        <div class="research-title">Collaborative &amp; heterogeneous multi-vehicle autonomy</div>
+        <div class="research-desc">Decentralized multi-agent coordination of USV–UAV–UUV teams for naval-relevant missions including formation control, rendezvous, task allocation, and distributed swarming. Coordination frameworks are based on artificial potential fields (APF) and decentralized cooperative control, validated in simulation and field experiments involving two WAM-V 16 USVs, a UAV, and a UUV.</div>
+        <img src="Collaborating USVs.png" alt="Collaborating USVs" class="research-img">
+      </div>
+    </div>
+
+    <div class="research-area">
+      <i class="ti ti-wave-sine research-icon" aria-hidden="true"></i>
+      <div style="width:100%">
+        <div class="research-title">Electromagnetic field (EMF) sensing</div>
+        <div class="research-desc">Development of a compact integrated sensor package for concurrent measurement of electric (E) and magnetic (B) fields in the water column, housed in a low-noise streamlined towfish deployed from an AUV or USV. A key advantage of the towfish configuration is spatial separation from the host platform, reducing platform-induced electromagnetic interference and enhancing signal fidelity.</div>
+        <img src="Towfish.png" alt="EMF sensor towfish" class="research-img">
+      </div>
+    </div>
+
+    <div class="research-area">
+      <i class="ti ti-cpu research-icon" aria-hidden="true"></i>
+      <div>
+        <div class="research-title">Geomagnetic navigation &amp; anomaly detection</div>
+        <div class="research-desc">Machine-learning and Gaussian process-based algorithms for real-time detection and localization of subsurface magnetic anomalies to support AUV geomagnetic navigation in GPS-denied environments, including geomagnetic and bathymetry-based terrain-aided navigation.</div>
+      </div>
+    </div>
+
+    <div class="research-area">
+      <i class="ti ti-propeller research-icon" aria-hidden="true"></i>
+      <div>
+        <div class="research-title">Ocean energy harvesting</div>
+        <div class="research-desc">Application of autonomous marine platforms for harvesting tidal and ocean currents using USV-based marine hydrokinetic (MHK) turbines, including modeling, design, and field testing of low-flow MHK systems for small unmanned mobile recharge stations.</div>
+      </div>
+    </div>
+
+    <div class="research-area">
+      <i class="ti ti-chart-dots research-icon" aria-hidden="true"></i>
+      <div>
+        <div class="research-title">Modeling, simulation &amp; field testing</div>
+        <div class="research-desc">Integrated modeling and simulation using Gazebo/VRX environments, hydrodynamic modeling of WAM-V 16 USVs, and extensive at-sea field validation offshore of Fort Lauderdale at FAU SeaTech's SFOMF range. Simulation-to-field transfer is a core methodology underpinning all platform development activities.</div>
+      </div>
+    </div>
+    <p class="section-label" style="margin-top:2rem;">Funded projects</p>
+
+    <div style="border: 1px solid #e5e5e0; border-radius: 12px; overflow: hidden;">
+      <table style="width:100%; border-collapse: collapse; font-size: 14px;">
+        <thead>
+          <tr style="background:#f8f8f6;">
+            <th style="text-align:left; padding: 10px 16px; font-weight:500; color:#888; font-size:12px; text-transform:uppercase; letter-spacing:0.06em; border-bottom: 1px solid #e5e5e0;">Project</th>
+            <th style="text-align:left; padding: 10px 16px; font-weight:500; color:#888; font-size:12px; text-transform:uppercase; letter-spacing:0.06em; border-bottom: 1px solid #e5e5e0; white-space:nowrap;">Sponsor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid #e5e5e0;">
+            <td style="padding: 12px 16px; color:#333;">USVs in support of multi-vehicle multi-domain maritime autonomy</td>
+            <td style="padding: 12px 16px; color:#555; white-space:nowrap;">ONR</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e5e5e0; background:#fafafa;">
+            <td style="padding: 12px 16px; color:#333;">Low-flow marine hydrokinetic turbine for small autonomous unmanned mobile recharge stations</td>
+            <td style="padding: 12px 16px; color:#555; white-space:nowrap;">DOE</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e5e5e0;">
+            <td style="padding: 12px 16px; color:#333;">Geomagnetic and bathymetry-based navigation system for an AUV</td>
+            <td style="padding: 12px 16px; color:#555; white-space:nowrap;">NAVSEA-NCWC</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e5e5e0; background:#fafafa;">
+            <td style="padding: 12px 16px; color:#333;">Small modular-payload ML-enabled USV platforms for collaborative USV operations</td>
+            <td style="padding: 12px 16px; color:#555; white-space:nowrap;">ONR</td>
+          </tr>
+          <tr>
+            <td style="padding: 12px 16px; color:#333;">An integrated sensor system for concurrent measurement of electric and magnetic fields in the water column</td>
+            <td style="padding: 12px 16px; color:#555; white-space:nowrap;">NAVSEA-NSWC</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="tab-publications" class="tab-content" role="tabpanel">
+    <p class="section-label">Books</p>
+
+    <div class="pub-item">
+      <div class="pub-title">Springer Handbook of Ocean Engineering <span class="badge">2016</span></div>
+      <div class="pub-authors">M. R. Dhanak and N. I. Xiros (Eds.)</div>
+      <div class="pub-venue">Springer, 2016. ISBN 978-3-319-16649-0</div>
+    </div>
+
+    <p class="section-label" style="margin-top:1.5rem;">Journal &amp; Conference Papers</p>
+
+    <div class="pub-item">
+      <div class="pub-title">PID auto-tuning for USVs: a multi-evolutionary optimization AI approach <span class="badge">2026</span></div>
+      <div class="pub-authors">X. Vicent, E. Sarda, and M. R. Dhanak</div>
+      <div class="pub-venue">Ocean Engineering, Volume 355, Part 1, 2026</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Using independent component analysis for magnetic anomaly detection and localization of closely located targets <span class="badge">2025</span></div>
+      <div class="pub-authors">E. Nieves, P.-P. Beaujean, M. Dhanak</div>
+      <div class="pub-venue">AIP Advances, 1 September 2025; 15 (9): 095007</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Fuzzy logic-assisted PID control for improved station-keeping of a catamaran-style USV <span class="badge">2025</span></div>
+      <div class="pub-authors">X. Vicent, E. I. Sarda and M. R. Dhanak</div>
+      <div class="pub-venue">OCEANS 2025 – Great Lakes, Chicago, IL, USA, 2025, pp. 1–8. doi: 10.23919/OCEANS59106.2025.11245057</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Decentralized COLREGs-based navigation for multiple USVs using artificial potential fields <span class="badge">2025</span></div>
+      <div class="pub-authors">X. Vicent and M. R. Dhanak</div>
+      <div class="pub-venue">OCEANS 2025 – Great Lakes, Chicago, IL, USA, 2025, pp. 1–9. doi: 10.23919/OCEANS59106.2025.11244982</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Development of a towed sensor towfish for AUV-based mapping of subsea electromagnetic field <span class="badge">2025</span></div>
+      <div class="pub-authors">T. Davies and M. Dhanak</div>
+      <div class="pub-venue">OCEANS 2025 – Great Lakes, Chicago, IL, USA, 2025, pp. 1–6. doi: 10.23919/OCEANS59106.2025.11245009</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">A magnetic anomaly and particle velocity array correlator for the detection of internal waves in the ocean <span class="badge">2024</span></div>
+      <div class="pub-authors">E. Nieves, P.-P. Beaujean, A. Tarantul Soto, M. Dhanak</div>
+      <div class="pub-venue">AIP Advances, 1 July 2024; 14 (7): 075102</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Performance and comparison of PID-based techniques for USV navigation <span class="badge">2024</span></div>
+      <div class="pub-authors">X. Vicent and M. R. Dhanak</div>
+      <div class="pub-venue">OCEANS 2024 – Halifax, Halifax, NS, Canada, 2024, pp. 1–10. doi: 10.1109/OCEANS55160.2024.10754061</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Improved three-dimensional terrain-aided AUV navigation using error state filtering <span class="badge">2024</span></div>
+      <div class="pub-authors">P. E. An, Z. Micallef, M. Dhanak and P.-P. Beaujean</div>
+      <div class="pub-venue">OCEANS 2024 – Halifax, Halifax, NS, Canada, 2024, pp. 1–9. doi: 10.1109/OCEANS55160.2024.10753849</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Low-flow marine hydrokinetic turbine for small autonomous unmanned mobile recharge stations <span class="badge">2024</span></div>
+      <div class="pub-authors">M. R. Dhanak</div>
+      <div class="pub-venue">U.S. Department of Energy, Office of Scientific and Technical Information (OSTI), 2024</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Development of an unmanned mobile current turbine platform <span class="badge">2023</span></div>
+      <div class="pub-authors">M. R. Dhanak, P.-P. Beaujean, J. Frankenfield, A. Hall, E. Henderson, A. McKinney, H. Pimentel, and T. T. Tran</div>
+      <div class="pub-venue">Proceedings of the 15th European Wave and Tidal Energy Conference (EWTEC), Bilbao, Spain, 2023. doi: 10.36688/ewtec-2023-402</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Sensor bias error estimation for terrain-aided navigation using low-cost AUVs <span class="badge">2023</span></div>
+      <div class="pub-authors">P. E. An, P. Beaujean, M. Dhanak and Z. Micallef</div>
+      <div class="pub-venue">OCEANS 2023 – Limerick, Limerick, Ireland, 2023, pp. 1–7</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Placement and denoising of total magnetic field sensors onboard an AUV in support of geophysical navigation <span class="badge">2022</span></div>
+      <div class="pub-authors">T. Cracchiolo, P.-P. Beaujean and M. Dhanak</div>
+      <div class="pub-venue">OCEANS 2022, Hampton Roads, VA, USA, 2022, pp. 1–7. doi: 10.1109/OCEANS47191.2022.9977322</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Hydrodynamic performance of a catamaran in shallow waters <span class="badge">2022</span></div>
+      <div class="pub-authors">K. Ulgen, M. R. Dhanak</div>
+      <div class="pub-venue">Journal of Marine Science and Engineering, 2022</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Thrust response and polynomial drag characterization of a USV with electric motors <span class="badge">2021</span></div>
+      <div class="pub-authors">A. J. Sinisterra, T. Moscicki, M. R. Dhanak et al.</div>
+      <div class="pub-venue">OCEANS 2021: San Diego – Porto, 2021</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Applying blind source separation to magnetic anomaly detection algorithms <span class="badge">2019</span></div>
+      <div class="pub-authors">E. Nieves, M. Dhanak, P.-P. Beaujean</div>
+      <div class="pub-venue">OCEANS 2019 MTS/IEEE, Seattle, WA, 2019</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Genetic algorithm based real-time localization of a magnetic anomaly with an AUV <span class="badge">2018</span></div>
+      <div class="pub-authors">H. Philippeaux, M. Dhanak</div>
+      <div class="pub-venue">OCEANS 2018 MTS/IEEE, Charleston, SC, 2018</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">A deep learning approach to target recognition in side-scan sonar imagery <span class="badge">2018</span></div>
+      <div class="pub-authors">D. Einsidler, M. Dhanak, K. Beaujean</div>
+      <div class="pub-venue">OCEANS 2018 MTS/IEEE, Charleston, SC, 2018</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Effects of EMF emissions from undersea electric cables on coral reef fish <span class="badge">2018</span></div>
+      <div class="pub-authors">A. K. Kilfoyle, R. F. Jermain, M. R. Dhanak et al.</div>
+      <div class="pub-venue">Aquatic Biology, 2018</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Launch and recovery of an autonomous underwater vehicle from a station-keeping unmanned surface vehicle <span class="badge">2018</span></div>
+      <div class="pub-authors">E. I. Sarda, M. R. Dhanak</div>
+      <div class="pub-venue">IEEE Journal of Oceanic Engineering, 43(2), 2018</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Stereovision-based target tracking system for USV operations <span class="badge">2017</span></div>
+      <div class="pub-authors">A. J. Sinisterra, M. R. Dhanak, K. von Ellenrieder</div>
+      <div class="pub-venue">Ocean Engineering, 2017</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">A USV platform for surface autonomy <span class="badge">2017</span></div>
+      <div class="pub-authors">A. Sinisterra, M. Dhanak</div>
+      <div class="pub-venue">OCEANS 2017 MTS/IEEE, Anchorage, AK, 2017</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Control of an unmanned surface vehicle with uncertain displacement and drag <span class="badge">2016</span></div>
+      <div class="pub-authors">W. B. Klinger, I. R. Bertaska, K. D. von Ellenrieder, M. R. Dhanak</div>
+      <div class="pub-venue">IEEE Journal of Oceanic Engineering, 42(2), 2016</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">A USV-based automated launch and recovery system for AUVs <span class="badge">2016</span></div>
+      <div class="pub-authors">E. I. Sarda, M. R. Dhanak</div>
+      <div class="pub-venue">IEEE Journal of Oceanic Engineering, 42(1), 2016</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Resolution-adaptive risk-aware trajectory planning for surface vehicles operating in congested civilian traffic <span class="badge">2016</span></div>
+      <div class="pub-authors">B. C. Shah, P. Švec, I. R. Bertaska, A. J. Sinisterra, W. Klinger, K. von Ellenrieder, M. Dhanak, S. Velastin</div>
+      <div class="pub-venue">Autonomous Robots, 40(7), 2016</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Characterization of EMF emissions from submarine cables and monitoring for potential responses of marine species <span class="badge">2015</span></div>
+      <div class="pub-authors">M. Dhanak, M. Kilfoyle, A. Ravenna, S. Coulson, R. Frankenfield, J. Jermain, R. Valdes, G. Spieler</div>
+      <div class="pub-venue">11th European Wave and Tidal Energy Conference (EWTEC), Nantes, France, 2015</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Experimental evaluation of automatically-generated behaviors for USV operations <span class="badge">2015</span></div>
+      <div class="pub-authors">I. R. Bertaska, B. Shah, K. von Ellenrieder, P. Švec, W. Klinger, A. J. Sinisterra, M. Dhanak, S. Velastin</div>
+      <div class="pub-venue">Ocean Engineering, 2015</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Trajectory planning with adaptive control primitives for autonomous surface vehicles operating in congested civilian traffic <span class="badge">2014</span></div>
+      <div class="pub-authors">B. C. Shah, P. Švec, I. R. Bertaska, W. Klinger, A. J. Sinisterra, K. von Ellenrieder, M. Dhanak, S. Velastin</div>
+      <div class="pub-venue">2014 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), Chicago, IL, 2014</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">High-level fuzzy logic guidance system for a USV tasked to perform autonomous launch and recovery of an AUV <span class="badge">2014</span></div>
+      <div class="pub-authors">D. Pearson, E. An, M. Dhanak, K. von Ellenrieder</div>
+      <div class="pub-venue">IEEE OCEANS 2014, St. John's, NL, Canada, 2014</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Stereo vision-based target tracking system for a USV <span class="badge">2014</span></div>
+      <div class="pub-authors">A. J. Sinisterra, M. R. Dhanak et al.</div>
+      <div class="pub-venue">OCEANS 2014 MTS/IEEE, St. John's, NL, Canada, 2014</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Magnetic field surveys of coastal waters using an AUV-towed magnetometer <span class="badge">2013</span></div>
+      <div class="pub-authors">M. Dhanak, E. An, R. Coulson, J. Frankenfield, W. Venezia, K. von Ellenrieder</div>
+      <div class="pub-venue">MTS/IEEE OCEANS 2013, San Diego, CA, 2013</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Unmanned recovery of an AUV from a surface platform <span class="badge">2013</span></div>
+      <div class="pub-authors">E. Sarda, M. Dhanak</div>
+      <div class="pub-venue">OCEANS 2013 MTS/IEEE, San Diego, CA, 2013</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Homing an unmanned underwater vehicle equipped with a DUSBL to an unmanned surface platform <span class="badge">2013</span></div>
+      <div class="pub-authors">M. Miranda, P.-P. Beaujean, E. An, M. Dhanak</div>
+      <div class="pub-venue">OCEANS 2013 MTS/IEEE, San Diego, CA, 2013</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Dynamics-aware target following for an autonomous surface vehicle operating under COLREGs in civilian traffic <span class="badge">2013</span></div>
+      <div class="pub-authors">P. Svec, B. C. Shah, I. R. Bertaska, J. Alvarez, A. J. Sinisterra, K. von Ellenrieder, M. Dhanak, S. Velastin</div>
+      <div class="pub-venue">2013 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), Tokyo, Japan, 2013</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Seakeeping characteristics of a wave-adaptive modular unmanned surface vehicle <span class="badge">2013</span></div>
+      <div class="pub-authors">M. R. Dhanak, P. Ananthakrishnan</div>
+      <div class="pub-venue">Proceedings of the ASME 2013 32nd International Conference on Ocean, Offshore and Arctic Engineering (OMAE2013), Nantes, France, 2013</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">An assessment of the hydrokinetic energy resource of the Florida Current <span class="badge">2012</span></div>
+      <div class="pub-authors">A. E. S. Duerr, M. R. Dhanak</div>
+      <div class="pub-venue">IEEE Journal of Oceanic Engineering, 37(2), 2012</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Utilizing the hybrid coordinate ocean model for the assessment of the Florida Current's hydrokinetic renewable energy resource <span class="badge">2012</span></div>
+      <div class="pub-authors">A. E. S. Duerr, M. R. Dhanak et al.</div>
+      <div class="pub-venue">Marine Technology Society Journal, 46(2), 2012</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Coastal oceanography using a small AUV <span class="badge">2001</span></div>
+      <div class="pub-authors">E. An, M. R. Dhanak, L. K. Shay, S. Smith</div>
+      <div class="pub-venue">Journal of Atmospheric and Oceanic Technology, 18(2), 2001</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">An AUV survey in the littoral zone: small-scale subsurface variability accompanying synoptic observations of surface currents <span class="badge">2001</span></div>
+      <div class="pub-authors">M. R. Dhanak, P. E. An, K. Holappa</div>
+      <div class="pub-venue">IEEE Journal of Oceanic Engineering, 26(4), 2001</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">An autonomous ocean turbulence measurement platform <span class="badge">1999</span></div>
+      <div class="pub-authors">M. R. Dhanak, K. Holappa</div>
+      <div class="pub-venue">Journal of Atmospheric and Oceanic Technology, 16(11), 1999</div>
+    </div>
+
+  </section>
+
+  <!-- GALLERY -->
+  <section id="tab-gallery" class="tab-content" role="tabpanel">
+
+    <p class="section-label">Videos</p>
+    <div class="gallery-grid" style="margin-bottom:2rem;">
+
+      <div class="gallery-card">
+        <video controls preload="none" poster="">
+          <source src="Open_Ocean_Testing_short_clip.mov" type="video/mp4">
+        </video>
+        <div class="gallery-caption">Open ocean testing of the WAM-V 16 USV off the coast of Fort Lauderdale</div>
+      </div>
+
+      <div class="gallery-card">
+        <video controls preload="none">
+          <source src="Vision-based Leader-following.mp4" type="video/mp4">
+        </video>
+        <div class="gallery-caption">Vision-based leader-following: autonomous USV tracking using stereo vision and deep learning</div>
+      </div>
+
+      <div class="gallery-card">
+        <video controls preload="none">
+          <source src="UAV_VRX-simulation.mp4" type="video/mp4">
+        </video>
+        <div class="gallery-caption">UAV takeoff and landing simulation in the Virtual RobotX (VRX) Gazebo environment</div>
+      </div>
+
+      <div class="gallery-card">
+        <video controls preload="none">
+          <source src="Aerial_drone_flight_deck.mp4" type="video/mp4">
+        </video>
+        <div class="gallery-caption">Aerial drone flight deck operations: UAV launch and recovery from the WAM-V 16 USV</div>
+      </div>
+
+      <div class="gallery-card">
+        <video controls preload="none">
+          <source src="DRL_based USV_Control_720.mov" type="video/mp4">
+        </video>
+        <div class="gallery-caption">Deep reinforcement learning (DRL)-based navigation and control of the WAM-V 16 USV in field trials</div>
+      </div>
+
+    </div>
+
+    <p class="section-label">Photos</p>
+    <div class="gallery-grid">
+
+      <div class="gallery-card">
+        <img src="WAM-V 16 USV.jpg" alt="WAM-V 16 USV">
+        <div class="gallery-caption">FAU's WAM-V 16 unmanned surface vehicle (USV) at the SeaTech facility, Dania Beach</div>
+      </div>
+
+      <div class="gallery-card">
+        <img src="Collaborating USVs.png" alt="Collaborating USVs">
+        <div class="gallery-caption">Two WAM-V 16 USVs operating collaboratively during field experiments</div>
+      </div>
+
+      <div class="gallery-card">
+        <img src="Towfish.png" alt="EMF sensor towfish">
+        <div class="gallery-caption">Custom EMF sensor towfish for AUV-based measurement of electric and magnetic fields in the water column</div>
+      </div>
+
+    </div>
+
+    <p style="font-size:13px; color:#999; margin-top:1.5rem;">
+      <i class="ti ti-info-circle" aria-hidden="true"></i>&nbsp;
+      Additional video content will be added as field campaigns are completed.
+    </p>
+
+  </section>
+
+  <!-- DISSERTATIONS & THESES -->
+  <section id="tab-theses" class="tab-content" role="tabpanel">
+
+    <p class="section-label">PhD dissertations — in progress</p>
+
+    <div class="pub-item">
+      <div class="pub-title">Decentralized cooperative navigation of USV–UAV teams in the maritime domain</div>
+      <div class="pub-authors">Xavier Vicent Navarro</div>
+      <div class="pub-venue">PhD Dissertation, Ocean Engineering, Florida Atlantic University (submitted)</div>
+    </div>
+
+    <p class="section-label" style="margin-top:1.5rem;">PhD dissertations supervised — completed</p>
+
+    <div class="pub-item">
+      <div class="pub-title">Modeling, implementation and control of a CVT based PTO for a small scale MHK-turbine in low-flow speed operation <span class="badge">2024</span></div>
+      <div class="pub-authors">Hugo Pimentel</div>
+      <div class="pub-venue">PhD Dissertation, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Small unmanned marine hydrokinetic platforms for power generation in coastal and tidal waters <span class="badge">2024</span></div>
+      <div class="pub-authors">Adriana McKinney</div>
+      <div class="pub-venue">PhD Dissertation, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Hydrodynamic performance and seakeeping analysis of a catamaran in transforming near-shore head and following seas <span class="badge">2022</span></div>
+      <div class="pub-authors">Kayhan Ulgen</div>
+      <div class="pub-venue">PhD Dissertation, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Empirical analysis of the dissipated acoustic energy in wave breaking <span class="badge">2020</span></div>
+      <div class="pub-authors">Kristina Franke</div>
+      <div class="pub-venue">PhD Dissertation, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Hydrodynamic performance of an unmanned catamaran vehicle in head seas <span class="badge">2019</span></div>
+      <div class="pub-authors">Bijoy Prasad</div>
+      <div class="pub-venue">PhD Dissertation, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Tidal power arrays and the Coriolis force with array design considerations <span class="badge">2019</span></div>
+      <div class="pub-authors">Victoria Miglietta</div>
+      <div class="pub-venue">PhD Dissertation, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Flow control through geometric modifications to improve airfoil/hydrofoil performance <span class="badge">2019</span></div>
+      <div class="pub-authors">Zao Ni</div>
+      <div class="pub-venue">PhD Dissertation, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Wave ship interaction in transforming seas <span class="badge">2017</span></div>
+      <div class="pub-authors">Fuxian Gong</div>
+      <div class="pub-venue">PhD Dissertation, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Numerical simulation of an ocean current turbine operating in a wake field <span class="badge">2016</span></div>
+      <div class="pub-authors">Parakram Pyakurel</div>
+      <div class="pub-venue">PhD Dissertation, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Automated launch and recovery system for AUVs from USVs <span class="badge">2016</span></div>
+      <div class="pub-authors">Eduardo Sarda</div>
+      <div class="pub-venue">PhD Dissertation, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Performance enhancement of an ACV in varying water depth <span class="badge">2015</span></div>
+      <div class="pub-authors">Nicholas Kouvaras</div>
+      <div class="pub-venue">PhD Dissertation, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Stereo vision-based target tracking system for USV operations <span class="badge">2015</span></div>
+      <div class="pub-authors">Armando Sinisterra</div>
+      <div class="pub-venue">PhD Dissertation, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Hydrokinetic resource assessment of the Florida Current <span class="badge">2012</span></div>
+      <div class="pub-authors">Alana Duerr</div>
+      <div class="pub-venue">PhD Dissertation, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Surface pressure fluctuations due to an impinging under-expanded supersonic jet <span class="badge">2002</span></div>
+      <div class="pub-authors">Binu Pundir</div>
+      <div class="pub-venue">PhD Dissertation, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Subsurface structure of an atmospherically forced water column in littoral waters <span class="badge">2002</span></div>
+      <div class="pub-authors">Michael Chernys</div>
+      <div class="pub-venue">PhD Dissertation, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Ocean turbulence measurement using an autonomous underwater vehicle <span class="badge">1997</span></div>
+      <div class="pub-authors">K. Holappa</div>
+      <div class="pub-venue">PhD Dissertation, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <p class="section-label" style="margin-top:1.5rem;">MS theses — in progress</p>
+
+    <div class="pub-item">
+      <div class="pub-title">Object avoidance system onboard an AUV in support of geomagnetic based navigation systems</div>
+      <div class="pub-authors">Eric Benavidez</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University (in progress)</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Sensor-equipped towfish for deployment from an AUV</div>
+      <div class="pub-authors">Danny Morris</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University (in progress)</div>
+    </div>
+
+    <p class="section-label" style="margin-top:1.5rem;">MS theses supervised — completed</p>
+
+    <div class="pub-item">
+      <div class="pub-title">PID auto-tuning of USVs — a multi-evolutionary optimization approach <span class="badge">2025</span></div>
+      <div class="pub-authors">Xavier Vicent Navarro</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Development and methodology for AUV-based geomagnetic surveys in support of geophysical navigation <span class="badge">2024</span></div>
+      <div class="pub-authors">Joshua Jepsen</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Attitude measuring sensor for a towed body <span class="badge">2024</span></div>
+      <div class="pub-authors">Garrett Flitton</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Characterization of a stereo vision system for object classification for USV navigation <span class="badge">2022</span></div>
+      <div class="pub-authors">Chad Kaplowitz</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Development of a sliding mode controller and control allocation optimized for electro-magnetic actuator limitations <span class="badge">2022</span></div>
+      <div class="pub-authors">Daniel Resio</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Design, simulation, and testing of a CVT based PTO and controller for a small scale MHK-turbine in low flow speed operation <span class="badge">2022</span></div>
+      <div class="pub-authors">Adam Hall</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Design &amp; development of a secure self-leveling wireless recharging platform for an aerial drone on an unmanned surface vessel <span class="badge">2021</span></div>
+      <div class="pub-authors">Adriana McKinley</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">An automated anchoring system for an unmanned surface vehicle <span class="badge">2021</span></div>
+      <div class="pub-authors">Amanda Fosbrook</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Localized flow modification to increase power capture of a small-scale floating undershot waterwheel <span class="badge">2020</span></div>
+      <div class="pub-authors">Sullivan Hess</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Generative adversarial network data generation for the use of real time image detection in side-scan sonar imagery <span class="badge">2019</span></div>
+      <div class="pub-authors">James McGinley</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Deep learning for automatic target recognition in side-scan sonar imagery <span class="badge">2018</span></div>
+      <div class="pub-authors">Dylan Einsidler</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">A low-level controller for a USV <span class="badge">2018</span></div>
+      <div class="pub-authors">Michael Diddams</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Real-time localization of a magnetic anomaly: a study on the effectiveness of a genetic algorithm for implementation on an autonomous underwater vehicle <span class="badge">2017</span></div>
+      <div class="pub-authors">Harryel Philippeaux</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Characterization of internal wave activity in the Straits of Florida <span class="badge">2017</span></div>
+      <div class="pub-authors">Andrew Tarantul Soto</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Optical 2D positional estimation for a biomimetic station-keeping autonomous underwater vehicle <span class="badge">2015</span></div>
+      <div class="pub-authors">Christopher Nunes</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">EMF emissions from submarine cables <span class="badge">2013</span></div>
+      <div class="pub-authors">Christopher Dibiasio</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Internal waves on a continental shelf <span class="badge">2012</span></div>
+      <div class="pub-authors">Arjun Jagannathan</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Global distribution of ocean thermal energy conversion resources and applicability in US waters near Florida <span class="badge">2012</span></div>
+      <div class="pub-authors">Lynn Rauchenstein (Co-Advisor: J. VanZwieten)</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">System identification methodology for a wave adaptive modular unmanned surface vehicle <span class="badge">2011</span></div>
+      <div class="pub-authors">Janine Mask</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Flow past an underwater turbine <span class="badge">2010</span></div>
+      <div class="pub-authors">Zaqie Reza</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Test platform development for measuring surface effect ship response to wave loads <span class="badge">2010</span></div>
+      <div class="pub-authors">Nicholas Kouvaras</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Subsurface flow generated by a steady wind stress applied at the water surface <span class="badge">2003</span></div>
+      <div class="pub-authors">Lionel Gurfinkiel</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Thermocline tracking with an upgraded ocean explorer autonomous underwater vehicle <span class="badge">2003</span></div>
+      <div class="pub-authors">Mathieu Clabon</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-title">Oceanic turbulence measurement using an AUV platform and development of graphical interfaces for data acquisition and analysis <span class="badge">2001</span></div>
+      <div class="pub-authors">Eric Leindecker</div>
+      <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
