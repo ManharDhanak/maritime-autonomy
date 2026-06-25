@@ -71,7 +71,14 @@
   .pub-title { font-size: 14px; font-weight: 600; color: var(--fau-blue); margin-bottom: 4px; line-height: 1.5; }
   .pub-authors { font-size: 13px; color: var(--text-muted); margin-bottom: 2px; }
   .pub-venue { font-size: 13px; color: var(--text-faint); font-style: italic; }
+  .pub-link { font-size: 12px; color: var(--fau-blue); margin-top: 4px; display: inline-block; }
+  .pub-link:hover { color: var(--fau-red); }
   .badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-left: 8px; vertical-align: middle; background: var(--fau-red); color: #fff; font-style: normal; font-weight: 500; }
+  .resource-card { background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--fau-blue); border-radius: 8px; padding: 1rem 1.25rem; margin-bottom: 10px; }
+  .resource-title { font-size: 14px; font-weight: 600; color: var(--fau-blue); margin-bottom: 2px; }
+  .resource-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; line-height: 1.5; }
+  .resource-link { font-size: 12px; color: var(--fau-blue); }
+  .resource-link:hover { color: var(--fau-red); }
 
   @media (max-width: 600px) {
     .site-header, .tab-content { padding-left: 1.25rem; padding-right: 1.25rem; }
@@ -94,6 +101,7 @@
     <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-publications" data-tab="publications">Publications</button>
     <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-theses" data-tab="theses">Dissertations &amp; Theses</button>
     <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-gallery" data-tab="gallery">Gallery</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-resources" data-tab="resources">Resources</button>
   </nav>
 </header>
 
@@ -267,6 +275,7 @@
       <div class="pub-title">Springer Handbook of Ocean Engineering <span class="badge">2016</span></div>
       <div class="pub-authors">M. R. Dhanak and N. I. Xiros (Eds.)</div>
       <div class="pub-venue">Springer, 2016. ISBN 978-3-319-16649-0</div>
+      <a class="pub-link" href="https://link.springer.com/book/9783319166483" target="_blank" rel="noopener">Publisher page →</a>
     </div>
 
     <p class="section-label" style="margin-top:1.5rem;">Journal &amp; Conference Papers</p>
@@ -275,48 +284,56 @@
       <div class="pub-title">PID auto-tuning for USVs: a multi-evolutionary optimization AI approach <span class="badge">2026</span></div>
       <div class="pub-authors">X. Vicent, E. Sarda, and M. R. Dhanak</div>
       <div class="pub-venue">Ocean Engineering, Volume 355, Part 1, 2026</div>
+      <a class="pub-link" href="https://doi.org/10.1016/j.oceaneng.2026.120685" target="_blank" rel="noopener">Full text →</a>
     </div>
 
     <div class="pub-item">
       <div class="pub-title">Using independent component analysis for magnetic anomaly detection and localization of closely located targets <span class="badge">2025</span></div>
       <div class="pub-authors">E. Nieves, P.-P. Beaujean, M. Dhanak</div>
       <div class="pub-venue">AIP Advances, 1 September 2025; 15 (9): 095007</div>
+      <a class="pub-link" href="https://doi.org/10.1063/5.0235239" target="_blank" rel="noopener">Full text →</a>
     </div>
 
     <div class="pub-item">
       <div class="pub-title">Fuzzy logic-assisted PID control for improved station-keeping of a catamaran-style USV <span class="badge">2025</span></div>
       <div class="pub-authors">X. Vicent, E. I. Sarda and M. R. Dhanak</div>
       <div class="pub-venue">OCEANS 2025 – Great Lakes, Chicago, IL, USA, 2025, pp. 1–8. doi: 10.23919/OCEANS59106.2025.11245057</div>
+      <a class="pub-link" href="https://doi.org/10.23919/OCEANS59106.2025.11245057" target="_blank" rel="noopener">Full text →</a>
     </div>
 
     <div class="pub-item">
       <div class="pub-title">Decentralized COLREGs-based navigation for multiple USVs using artificial potential fields <span class="badge">2025</span></div>
       <div class="pub-authors">X. Vicent and M. R. Dhanak</div>
       <div class="pub-venue">OCEANS 2025 – Great Lakes, Chicago, IL, USA, 2025, pp. 1–9. doi: 10.23919/OCEANS59106.2025.11244982</div>
+      <a class="pub-link" href="https://doi.org/10.23919/OCEANS59106.2025.11244982" target="_blank" rel="noopener">Full text →</a>
     </div>
 
     <div class="pub-item">
       <div class="pub-title">Development of a towed sensor towfish for AUV-based mapping of subsea electromagnetic field <span class="badge">2025</span></div>
       <div class="pub-authors">T. Davies and M. Dhanak</div>
       <div class="pub-venue">OCEANS 2025 – Great Lakes, Chicago, IL, USA, 2025, pp. 1–6. doi: 10.23919/OCEANS59106.2025.11245009</div>
+      <a class="pub-link" href="https://doi.org/10.23919/OCEANS59106.2025.11245009" target="_blank" rel="noopener">Full text →</a>
     </div>
 
     <div class="pub-item">
       <div class="pub-title">A magnetic anomaly and particle velocity array correlator for the detection of internal waves in the ocean <span class="badge">2024</span></div>
       <div class="pub-authors">E. Nieves, P.-P. Beaujean, A. Tarantul Soto, M. Dhanak</div>
       <div class="pub-venue">AIP Advances, 1 July 2024; 14 (7): 075102</div>
+      <a class="pub-link" href="https://doi.org/10.1063/5.0209838" target="_blank" rel="noopener">Full text →</a>
     </div>
 
     <div class="pub-item">
       <div class="pub-title">Performance and comparison of PID-based techniques for USV navigation <span class="badge">2024</span></div>
       <div class="pub-authors">X. Vicent and M. R. Dhanak</div>
       <div class="pub-venue">OCEANS 2024 – Halifax, Halifax, NS, Canada, 2024, pp. 1–10. doi: 10.1109/OCEANS55160.2024.10754061</div>
+      <a class="pub-link" href="https://doi.org/10.1109/OCEANS55160.2024.10754061" target="_blank" rel="noopener">Full text →</a>
     </div>
 
     <div class="pub-item">
       <div class="pub-title">Improved three-dimensional terrain-aided AUV navigation using error state filtering <span class="badge">2024</span></div>
       <div class="pub-authors">P. E. An, Z. Micallef, M. Dhanak and P.-P. Beaujean</div>
       <div class="pub-venue">OCEANS 2024 – Halifax, Halifax, NS, Canada, 2024, pp. 1–9. doi: 10.1109/OCEANS55160.2024.10753849</div>
+      <a class="pub-link" href="https://doi.org/10.1109/OCEANS55160.2024.10753849" target="_blank" rel="noopener">Full text →</a>
     </div>
 
     <div class="pub-item">
@@ -329,6 +346,7 @@
       <div class="pub-title">Development of an unmanned mobile current turbine platform <span class="badge">2023</span></div>
       <div class="pub-authors">M. R. Dhanak, P.-P. Beaujean, J. Frankenfield, A. Hall, E. Henderson, A. McKinney, H. Pimentel, and T. T. Tran</div>
       <div class="pub-venue">Proceedings of the 15th European Wave and Tidal Energy Conference (EWTEC), Bilbao, Spain, 2023. doi: 10.36688/ewtec-2023-402</div>
+      <a class="pub-link" href="https://doi.org/10.36688/ewtec-2023-402" target="_blank" rel="noopener">Full text →</a>
     </div>
 
     <div class="pub-item">
@@ -341,6 +359,7 @@
       <div class="pub-title">Placement and denoising of total magnetic field sensors onboard an AUV in support of geophysical navigation <span class="badge">2022</span></div>
       <div class="pub-authors">T. Cracchiolo, P.-P. Beaujean and M. Dhanak</div>
       <div class="pub-venue">OCEANS 2022, Hampton Roads, VA, USA, 2022, pp. 1–7. doi: 10.1109/OCEANS47191.2022.9977322</div>
+      <a class="pub-link" href="https://doi.org/10.1109/OCEANS47191.2022.9977322" target="_blank" rel="noopener">Full text →</a>
     </div>
 
     <div class="pub-item">
@@ -844,6 +863,97 @@
       <div class="pub-title">Oceanic turbulence measurement using an AUV platform and development of graphical interfaces for data acquisition and analysis <span class="badge">2001</span></div>
       <div class="pub-authors">Eric Leindecker</div>
       <div class="pub-venue">MS Thesis, Ocean Engineering, Florida Atlantic University</div>
+    </div>
+
+  </section>
+
+  <!-- RESOURCES -->
+  <section id="tab-resources" class="tab-content" role="tabpanel">
+    <p class="section-label">EMF Ocean Sensing — Suggested Reading</p>
+    <p style="font-size:14px;color:var(--text-muted);margin-bottom:1.25rem;">A curated list of references covering the fundamentals and applications of electromagnetic field sensing in the marine environment.</p>
+
+    <p class="section-label" style="margin-top:1.5rem;">Textbooks &amp; Reference Works</p>
+
+    <div class="resource-card">
+      <div class="resource-title">Springer Handbook of Ocean Engineering</div>
+      <div class="resource-desc">M. R. Dhanak &amp; N. I. Xiros (Eds.), Springer, 2016. Chapters on underwater sensors, AUVs, and marine electromagnetics.</div>
+      <a class="resource-link" href="https://link.springer.com/book/9783319166483" target="_blank" rel="noopener">link.springer.com →</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-title">The Electrical Nature of Storms</div>
+      <div class="resource-desc">D. R. MacGorman &amp; W. D. Rust, Oxford University Press, 1998. Background on natural electromagnetic phenomena in the environment.</div>
+      <a class="resource-link" href="https://global.oup.com/academic/product/the-electrical-nature-of-storms-9780195073379" target="_blank" rel="noopener">Oxford Academic →</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-title">Introduction to Geomagnetic Fields</div>
+      <div class="resource-desc">W. H. Campbell, Cambridge University Press, 2003. Covers Earth's magnetic field, anomaly detection, and measurement techniques relevant to ocean sensing.</div>
+      <a class="resource-link" href="https://www.cambridge.org/core/books/introduction-to-geomagnetic-fields/5FD9E5B2CAF880A79EF6E3E47C2A15CB" target="_blank" rel="noopener">Cambridge Core →</a>
+    </div>
+
+    <p class="section-label" style="margin-top:1.5rem;">Journal &amp; Conference Papers</p>
+
+    <div class="resource-card">
+      <div class="resource-title">Placement and Denoising of Total Magnetic Field Sensors Onboard an AUV</div>
+      <div class="resource-desc">T. Cracchiolo, P.-P. Beaujean &amp; M. Dhanak. OCEANS 2022, Hampton Roads. Addresses sensor placement strategies for minimizing platform noise.</div>
+      <a class="resource-link" href="https://doi.org/10.1109/OCEANS47191.2022.9977322" target="_blank" rel="noopener">doi: 10.1109/OCEANS47191.2022.9977322 →</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-title">A Magnetic Anomaly and Particle Velocity Array Correlator for Detection of Internal Waves</div>
+      <div class="resource-desc">E. Nieves, P.-P. Beaujean, A. Tarantul Soto &amp; M. Dhanak. AIP Advances, 14(7): 075102, 2024. Demonstrates ocean sensing using magnetic field correlators.</div>
+      <a class="resource-link" href="https://doi.org/10.1063/5.0209838" target="_blank" rel="noopener">doi: 10.1063/5.0209838 →</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-title">Using Independent Component Analysis for Magnetic Anomaly Detection and Localization</div>
+      <div class="resource-desc">E. Nieves, P.-P. Beaujean &amp; M. Dhanak. AIP Advances, 15(9): 095007, 2025. ICA-based signal processing for multi-target magnetic anomaly detection.</div>
+      <a class="resource-link" href="https://doi.org/10.1063/5.0235239" target="_blank" rel="noopener">doi: 10.1063/5.0235239 →</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-title">Characterization of EMF Emissions from Submarine Cables and Monitoring for Potential Responses of Marine Species</div>
+      <div class="resource-desc">M. Dhanak et al. EWTEC 2015. Characterizes electromagnetic field profiles from undersea cables and their potential ecological effects.</div>
+      <a class="resource-link" href="https://doi.org/10.36688/ewtec-2015" target="_blank" rel="noopener">EWTEC Proceedings →</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-title">Effects of EMF Emissions from Undersea Electric Cables on Coral Reef Fish</div>
+      <div class="resource-desc">A. K. Kilfoyle, R. F. Jermain, M. R. Dhanak et al. Aquatic Biology, 2018. Examines biological sensitivity of marine species to ocean EMF.</div>
+      <a class="resource-link" href="https://www.int-res.com/abstracts/ab/v27/n1/p53-66/" target="_blank" rel="noopener">Full text →</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-title">Applying Blind Source Separation to Magnetic Anomaly Detection Algorithms</div>
+      <div class="resource-desc">E. Nieves, M. Dhanak &amp; P.-P. Beaujean. OCEANS 2019, Seattle. Applies signal separation techniques to improve magnetic target detection.</div>
+      <a class="resource-link" href="https://ieeexplore.ieee.org/document/8867819" target="_blank" rel="noopener">IEEE Xplore →</a>
+    </div>
+
+    <p class="section-label" style="margin-top:1.5rem;">Online Resources &amp; Standards</p>
+
+    <div class="resource-card">
+      <div class="resource-title">NOAA National Centers for Environmental Information — Geomagnetic Data</div>
+      <div class="resource-desc">Access to World Magnetic Model (WMM) data, magnetic anomaly grids, and ocean magnetic surveys maintained by NOAA.</div>
+      <a class="resource-link" href="https://www.ncei.noaa.gov/products/world-magnetic-model" target="_blank" rel="noopener">ncei.noaa.gov →</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-title">MARUM — Center for Marine Environmental Sciences: EM Sensing</div>
+      <div class="resource-desc">Overview of marine electromagnetic methods and sea-floor controlled-source EM (CSEM) surveying techniques from a leading ocean research institute.</div>
+      <a class="resource-link" href="https://www.marum.de/en/Research/Geophysics.html" target="_blank" rel="noopener">marum.de →</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-title">IEEE Journal of Oceanic Engineering — Special Issues on Marine Sensing</div>
+      <div class="resource-desc">Peer-reviewed articles on underwater sensing systems, magnetic anomaly detection, AUV instrumentation, and ocean electromagnetics.</div>
+      <a class="resource-link" href="https://ieeexplore.ieee.org/xpl/RecentIssue.jsp?punumber=48" target="_blank" rel="noopener">IEEE Xplore →</a>
+    </div>
+
+    <div class="resource-card">
+      <div class="resource-title">AIP Advances — Applied Physics including Ocean EMF</div>
+      <div class="resource-desc">Open-access journal publishing applied physics research including electromagnetic sensing, signal processing, and marine applications.</div>
+      <a class="resource-link" href="https://pubs.aip.org/aip/adv" target="_blank" rel="noopener">pubs.aip.org →</a>
     </div>
 
   </section>
